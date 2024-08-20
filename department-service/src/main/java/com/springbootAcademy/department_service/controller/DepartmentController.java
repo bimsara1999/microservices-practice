@@ -1,4 +1,4 @@
-package com.springbootAcademy.department_service.controller;
+/*package com.springbootAcademy.department_service.controller;
 
 import com.springbootAcademy.department_service.dto.DepartmentDTO;
 import com.springbootAcademy.department_service.service.DepartmentService;
@@ -27,4 +27,4 @@ public class DepartmentController {
         DepartmentDTO departmentDTO = departmentService.getDepartmentByCode(departmentCode);
         return new ResponseEntity<>(departmentDTO , HttpStatus.OK);
     }
-}
+}*/
