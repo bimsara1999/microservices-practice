@@ -56,6 +56,7 @@ public class EmployeeServiceIMPL implements EmployeeService {
     }
 
    // @CircuitBreaker(name = "${spring.application.name}" , fallbackmethod = "getDeafaultDepartment")
+  //  @Retry(name = "${spring.application.name}" , fallbackmethod = "getDeafaultDepartment")
 
     @Override
     public ApiResponseDTO getEmployeeById(Long id) {
