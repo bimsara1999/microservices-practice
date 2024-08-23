@@ -7,18 +7,27 @@ import com.springbootAcademy.employee_service.entity.Employee;
 import com.springbootAcademy.employee_service.repository.EmployeeRepository;
 import com.springbootAcademy.employee_service.service.EmployeeService;
 import lombok.AllArgsConstructor;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.logging.Logger;
+
+import static org.hibernate.sql.ast.SqlTreeCreationLogger.LOGGER;
+
 @Service
-@AllArgsConstructor
+@ AllArgsConstructor
 public class EmployeeServiceIMPL implements EmployeeService {
+
+   // private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeServiceIMPL.class);
 
     private EmployeeRepository employeeRepository;
    // private RestTemplate restTemplate;
     private WebClient webClient;
+
+
 
 
 
@@ -46,11 +55,17 @@ public class EmployeeServiceIMPL implements EmployeeService {
         return savedEmployeeDTO;
     }
 
+   // @CircuitBreaker(name = "${spring.application.name}" , fallbackmethod = "getDeafaultDepartment")
+
     @Override
     public ApiResponseDTO getEmployeeById(Long id) {
 
+        //LOGGER.info("inside employeee");
+
         //database ekata entity haraha
         Employee employee = employeeRepository.findById(id).get();
+
+
 
 
         //communication with rest template
@@ -71,6 +86,37 @@ public class EmployeeServiceIMPL implements EmployeeService {
 
         // using api client
         //DepartmentDTO departmentDTO = apiClient.getDepartment(employee.getDepartmentCode());
+
+
+        EmployeeDTO employeeDTO = new EmployeeDTO(
+
+                employee.getId(),
+                employee.getFirstname(),
+                employee.getLastname(),
+                employee.getEmail(),
+                employee.getDepartmentCode()
+        );
+        ApiResponseDTO apiResponseDTO = new ApiResponseDTO();
+        apiResponseDTO.setEmployeeDTO(employeeDTO);
+        apiResponseDTO.setDepartmentDTO(departmentDTO);
+        return apiResponseDTO;
+    }
+
+    ///@Override
+    public ApiResponseDTO getDefaultDepartment(Long id , Exception exception) {
+
+        //LOGGER.info("inside getdefault department method");
+
+
+        Employee employee = employeeRepository.findById(id).get();
+
+        DepartmentDTO departmentDTO = new DepartmentDTO();
+        departmentDTO.setDepartmentName("Default Department");
+        departmentDTO.setDepartmentName("d001");
+        departmentDTO.setDepartmentDescription("develop");
+
+
+
 
 
         EmployeeDTO employeeDTO = new EmployeeDTO(
