@@ -3,6 +3,7 @@ package com.springbootAcademy.employee_service.service.impl;
 import com.springbootAcademy.employee_service.dto.ApiResponseDTO;
 import com.springbootAcademy.employee_service.dto.DepartmentDTO;
 import com.springbootAcademy.employee_service.dto.EmployeeDTO;
+import com.springbootAcademy.employee_service.dto.OrganizationDTO;
 import com.springbootAcademy.employee_service.entity.Employee;
 import com.springbootAcademy.employee_service.repository.EmployeeRepository;
 import com.springbootAcademy.employee_service.service.EmployeeService;
@@ -87,6 +88,14 @@ public class EmployeeServiceIMPL implements EmployeeService {
                 .block();
 
 
+        OrganizationDTO organizationDTO =   webClient.get()
+
+                .uri("http://localhost:8083/api/organization/" + employee.getOrganizationCode())
+                .retrieve()
+                .bodyToMono(OrganizationDTO.class)
+                .block();
+
+
         // using api client
         //DepartmentDTO departmentDTO = apiClient.getDepartment(employee.getDepartmentCode());
 
@@ -135,6 +144,7 @@ public class EmployeeServiceIMPL implements EmployeeService {
         ApiResponseDTO apiResponseDTO = new ApiResponseDTO();
         apiResponseDTO.setEmployeeDTO(employeeDTO);
         apiResponseDTO.setDepartmentDTO(departmentDTO);
+        apiResponseDTO.setOrganizationDTO(new OrganizationDTO());
         return apiResponseDTO;
     }
 }
