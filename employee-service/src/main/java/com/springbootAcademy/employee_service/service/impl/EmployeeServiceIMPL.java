@@ -41,7 +41,8 @@ public class EmployeeServiceIMPL implements EmployeeService {
                 employeeDTO.getFirstname(),
                 employeeDTO.getLastname(),
                 employeeDTO.getEmail(),
-                employeeDTO.getDepartmentCode()
+                employeeDTO.getDepartmentCode(),
+                employeeDTO.getOrganizationCode()
         );
         Employee savedEmployee = employeeRepository.save(employee);
 
@@ -50,7 +51,8 @@ public class EmployeeServiceIMPL implements EmployeeService {
                 savedEmployee.getFirstname(),
                 savedEmployee.getLastname(),
                 savedEmployee.getEmail(),
-                savedEmployee.getDepartmentCode()
+                savedEmployee.getDepartmentCode(),
+                savedEmployee.getOrganizationCode()
         );
         return savedEmployeeDTO;
     }
@@ -95,7 +97,8 @@ public class EmployeeServiceIMPL implements EmployeeService {
                 employee.getFirstname(),
                 employee.getLastname(),
                 employee.getEmail(),
-                employee.getDepartmentCode()
+                employee.getDepartmentCode(),
+                employee.getOrganizationCode()
         );
         ApiResponseDTO apiResponseDTO = new ApiResponseDTO();
         apiResponseDTO.setEmployeeDTO(employeeDTO);
@@ -126,7 +129,8 @@ public class EmployeeServiceIMPL implements EmployeeService {
                 employee.getFirstname(),
                 employee.getLastname(),
                 employee.getEmail(),
-                employee.getDepartmentCode()
+                employee.getDepartmentCode(),
+                employee.getOrganizationCode()
         );
         ApiResponseDTO apiResponseDTO = new ApiResponseDTO();
         apiResponseDTO.setEmployeeDTO(employeeDTO);
